@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hotspots!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.marionette/2.4.1/backbone.marionette.min.js"></script>
+
+    <script src="https://cdn.firebase.com/js/client/2.2.3/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/backbonefire/0.5.1/backbonefire.min.js"></script>
+    <link rel="stylesheet" href="hotspots.css">
+  </head>
+  <body>
+    Loading...
+
+    <script type="text/template" id="board-template">
+      <h1>Hotspots</h1>
+      <hr>
+
+      <table>
+        <% _.each(cells, function(row, i) { %>
+        <tr>
+          <% _.each(row, function(cell, j) { %>
+          <td class="cell count-<%= cell %>" data-row="<%= i %>" data-col="<%= j %>"></td>
+          <% }); %>
+        </tr>
+        <% }); %>
+      </table>
+    </script>
+    <script src="hotspots.js"></script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    margin: 20px;
+}
+
+hr {
+    margin-bottom: 20px;
+}
+
+table {
+    margin: auto;
+}
+
+.cell {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border: thin solid black;
+}
+
+.count-0 {
+    background-color: #fff;
+}
+
+.count-1 {
+    background-color: #fee;
+}
+
+.count-2 {
+    background-color: #fdd;
+}
+
+.count-3 {
+    background-color: #fcc;
+}
+
+.count-4 {
+    background-color: #fbb;
+}
+
+.count-5 {
+    background-color: #faa;
+}
+
+.count-6 {
+    background-color: #f99;
+}
+
+.count-7 {
+    background-color: #f88;
+}
+
+.count-8 {
+    background-color: #f77;
+}
+
+.count-9 {
+    background-color: #f66;
+}
+
+.count-10 {
+    background-color: #f55;
+}
+
+.count-11 {
+    background-color: #f44;
+}
+
+.count-12 {
+    background-color: #f33;
+}
+
+.count-13 {
+    background-color: #f22;
+}
+
+.count-14 {
+    background-color: #f11;
+}
+
+.count-15 {
+    background-color: #f00;
+}
