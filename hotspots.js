@@ -21,9 +21,7 @@
     return cells;
   }
 
-  var Board = Backbone.Firebase.Model.extend({
-    urlRoot: "https://hotspots-demo.firebaseio.com/board/",
-
+  var Board = Backbone.Model.extend({
     defaults: {
       cells: []
     },
@@ -34,7 +32,8 @@
 
     setCell: function(x, y, value) {
       this.get('cells')[x][y] = value;
-      this.save();
+      // We cheat a little bit here
+      this.trigger('change');
     },
 
     reset: function() {
@@ -57,8 +56,7 @@
     },
 
     modelEvents: {
-      "change": "render",
-      "sync": "render"
+      "change": "render"
     },
 
     handleClick: function(e) {
