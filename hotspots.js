@@ -6,20 +6,26 @@
       BOARD_HEIGHT = 25,
       MAX_HEAT     = 15;
 
-  var Board = Backbone.Model.extend({
-    initialize: function() {
-      var cells = [];
+  function empty() {
+    var cells = [];
 
-      _.times(BOARD_HEIGHT, function() {
-        var row = [];
-        cells[cells.length] = row;
+    _.times(BOARD_HEIGHT, function() {
+      var row = [];
+      cells[cells.length] = row;
 
-        _.times(BOARD_WIDTH, function() {
-          row[row.length] = 0;
-        });
+      _.times(BOARD_WIDTH, function() {
+        row[row.length] = 0;
       });
+    });
 
-      this.set('cells', cells);
+    return cells;
+  }
+
+  var Board = Backbone.Firebase.Model.extend({
+    urlRoot: "https://hotspots-demo.firebaseio.com/board/",
+
+    defaults: {
+      cells: []
     },
 
     getCell: function(x, y) {
@@ -28,9 +34,11 @@
 
     setCell: function(x, y, value) {
       this.get('cells')[x][y] = value;
+      this.save();
+    },
 
-      // We are cheating a little here but lets pretend we changed a real attribute
-      this.trigger('change');
+    reset: function() {
+      this.set('cells', empty());
     }
   });
 
@@ -39,15 +47,18 @@
     el: "body",
 
     ui: {
-      cells: ".cell"
+      cells: ".cell",
+      resetBtn: ".reset-button"
     },
 
     events: {
-      "click @ui.cells": "handleClick"
+      "click @ui.cells": "handleClick",
+      "click @ui.resetBtn": "resetBoard"
     },
 
     modelEvents: {
-      "change": "render"
+      "change": "render",
+      "sync": "render"
     },
 
     handleClick: function(e) {
@@ -59,6 +70,10 @@
       if (count <= MAX_HEAT) {
         this.model.setCell(row, col, count);
       }
+    },
+
+    resetBoard: function() {
+      this.model.reset();
     }
   })
 
@@ -69,7 +84,9 @@
     app.view.render();
   });
 
-  app.start({
-    model: new Board()
-  });
+  setTimeout(function() {
+    app.start({
+      model: new Board({ id: 1337 })
+    });
+  }, 500);
 })();
